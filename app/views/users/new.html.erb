@@ -1,0 +1,23 @@
+<h1>Sign in to Todo list</h1>
+
+<%= form_for @user, url: users_path do |f| %>  
+  <% @user.errors.full_messages.each do |msg| %>
+    <p>
+      <%= msg %>
+    </p>
+  <% end %>
+
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+
+  <%= f.label :full_name   %>
+  <%= f.text_field :full_name  %>
+
+  <%= f.label :password   %>
+  <%= f.password_field :password  %>
+
+  <%= f.label :password_confirmation   %>
+  <%= f.password_field :password_confirmation  %>
+
+  <%= f.submit %>
+<% end %>
