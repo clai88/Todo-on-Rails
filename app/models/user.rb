@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   has_many :lists
   validates :email, format: {with: /@/}, uniqueness: true
-  validates :password, presence: true, confirmation: true
+  validates :password_digest, presence: true
+  validates :password, confirmation: true
 
   def self.sign_up(args)
     User.create(args)
