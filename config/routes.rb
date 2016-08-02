@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   delete '/login' => "sessions#destroy"
 
   resources :lists
+  get '/lists/:name' => "lists#show_list"
 
   resources :users, only: [:new, :create]
   # The priority is based upon order of creation: first created -> highest priority.
