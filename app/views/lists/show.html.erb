@@ -1,1 +1,74 @@
-<h1>you are currently looking at <%= @list.name %></h1>
+<h1>you are currently looking at list <%= @list.name %></h1>
+
+<% if @tasks[0] == nil %>
+
+<h2><%= @current_list_name %> is currently empty.  Click the box below to add a task</h2>
+
+<% else %>
+
+<h2>these are your tasks:</h2>
+<table >
+  <thead>
+    <tr>
+      <th>
+        Task
+      </th>
+      <th>
+        Due date
+      </th>
+      <th>
+        Update Due date
+      </th>
+      <th>
+        Mark as complete
+      </th>
+    
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+    <tr>
+      <td>
+        <%= task.name %>
+      </td>
+      <td>
+        <% if task.due_on == nil %>
+        Due date not set
+        <% else %>
+        <%= task.due_on %>
+        <% end %>
+      </td>
+      <td>
+        <form action="/items/<%= task.id %>" method="POST">
+          <input type="hidden" name="_method" value="PATCH">
+          <input type="date" name="task[due_on]" value="" >
+          <input class="btn btn-warning" type="submit" name="submit_button" value="Submit">
+        </form>
+      </td>
+      <td>
+        <form class="/items/<%= task.id %>" action="index.html" method="post">
+
+
+        <label class="switch">
+          <input type="checkbox" name= "is_completed" value="Yes"
+          checked="checked">
+
+          <div class="slider round"></div>
+        </label>
+          </form>
+          <%= task.is_completed %>
+      </td>
+
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+
+<%= form_for @task, url: task_create_path do |f| %>
+<%= f.label :name %>
+<%= f.text_field :name %>
+
+
+<%= f.submit "submit list" %>
+<% end %>

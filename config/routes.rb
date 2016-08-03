@@ -4,8 +4,11 @@ Rails.application.routes.draw do
   post '/login' => "sessions#create"
   delete '/login' => "sessions#destroy"
 
-  resources :lists
-  get '/lists/:name' => "lists#show_list"
+  resources :lists, only: [:new,:index,:create]
+  get '/lists/:name' => "lists#show"
+  post '/lists/:name/items' => "lists#new_task", as: :task_create
+
+  patch '/items/:id' => "tasks#update", as: :task_update
 
   resources :users, only: [:new, :create]
   # The priority is based upon order of creation: first created -> highest priority.
