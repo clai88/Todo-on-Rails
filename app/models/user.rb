@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_many :lists
   validates :email, format: {with: /@/}, uniqueness: true
-  validates :password_digest, presence: true
+  validates :password_digest, length: { minimum: 6 ,message: "Password must be at least 6 characters long" }, , format: {with: /a-zA-Z0-9/}presence: true
   validates :password, confirmation: true
 
   def self.sign_up(args)
