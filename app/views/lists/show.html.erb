@@ -22,7 +22,7 @@
       <th>
         Mark as complete
       </th>
-    
+
     </tr>
   </thead>
   <tbody>
@@ -42,21 +42,23 @@
         <form action="/items/<%= task.id %>" method="POST">
           <input type="hidden" name="_method" value="PATCH">
           <input type="date" name="task[due_on]" value="" >
-          <input class="btn btn-warning" type="submit" name="submit_button" value="Submit">
+          <input  type="submit" name="submit_button" value="Update">
         </form>
       </td>
       <td>
-        <form class="/items/<%= task.id %>" action="index.html" method="post">
+        <form  action= "/items/<%= task.id %>" method="post">
+            <input type="hidden" name="_method" value="DELETE">
 
 
-        <label class="switch">
-          <input type="checkbox" name= "is_completed" value="Yes"
-          checked="checked">
+          <label class="switch">
+            <input type="checkbox" name= "is_completed" value="Yes"
+            checked="checked">
 
-          <div class="slider round"></div>
-        </label>
-          </form>
-          <%= task.is_completed %>
+            <div class="slider round"></div>
+          </label>
+          <input type="submit" name="submit_button" value="Delete">
+        </form>
+        <%= task.is_completed %>
       </td>
 
     </tr>

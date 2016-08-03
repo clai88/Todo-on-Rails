@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post '/lists/:name/items' => "lists#new_task", as: :task_create
 
   patch '/items/:id' => "tasks#update", as: :task_update
+  delete '/items/:id' => "tasks#update"
 
   resources :users, only: [:new, :create]
   # The priority is based upon order of creation: first created -> highest priority.
