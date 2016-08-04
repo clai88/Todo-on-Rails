@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
 
   patch '/items/:id' => "tasks#update", as: :task_update
-  delete '/items/:id' => "tasks#destroy"
+  patch '/items/:id/complete' => "tasks#completed", as: :task_complete
 
   resources :users, only: [:new, :create]
 

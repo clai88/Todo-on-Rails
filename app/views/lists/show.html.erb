@@ -26,7 +26,9 @@
     </tr>
   </thead>
   <tbody>
-    <% @tasks.each do |task| %>
+    <% @incomplete_tasks = @tasks.all.select { |t| t.is_completed == nil } %>
+    <% @incomplete_tasks.each do |task| %>
+
     <tr>
       <td>
         <%= task.name %>
@@ -39,22 +41,20 @@
         <% end %>
       </td>
       <td>
-        <form action="/items/<%= task.id %>" method="POST">
-          <input type="hidden" name="_method" value="PATCH">
-          <input type="date" name="task[due_on]" value="" >
-          <input  type="submit" name="submit_button" value="Update">
-        </form>
+        <%= form_for task, url: task_update_path(task.id), method: :patch do |f| %>
+        <%= f.label :due_on%>
+        <%= f.date_field :due_on%>
+        <%= f.submit "Update date"%>
+
+        <% end %>
+
       </td>
       <td>
-        <%= form_for task, url: "/items/#{task.id}", method: :delete do |f| %>
-        <%= f.submit "complete"  %>
-        <% end %>
-        <%= task.name %> is <%= task.is_completed %>
-
-        <%= link_to "Complete", task_update_path(task.id), method: :delete %>
+        <%= link_to "Complete", task_complete_path(task.id), method: :patch %>
       </td>
     </tr>
     <% end %>
+
   </tbody>
 </table>
 <% end %>

@@ -18,6 +18,7 @@ class ListsController < ApplicationController
     @list = List.all.find_by(name: params["name"])
     @tasks = Task.where(list_id: @list.id)
     @task = Task.new
+
   end
 
   def new_task
@@ -36,13 +37,16 @@ class ListsController < ApplicationController
   def search
     @task = Task.new
 
+    @query = params[:q]
+    @lists = List.where(user_id: session[:user_id])
+
+    @matched_list_items = List.all.select { |i| i.name.include? @query }
+    @matched_task_items = Task.all.select { |i| i.name.include? @query }
   end
 
   private def list_params
     params.require("list").permit(:name)
   end
-
-
 
   private def task_params
     params.require("task").permit(:name)
