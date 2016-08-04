@@ -1,3 +1,10 @@
 <h1>searchpage</h1>
 
-<%= @task %>
+<% @tasks.each do |task| %>
+<p>
+  <%= task.name %>
+</p>
+<% end %>
+
+
+<%= link_to "Back to lists", lists_path %>

@@ -15,8 +15,10 @@
  */
 
  body{
-   background-color: rgb(223, 222, 158);
-   width: 680px;
+   background-color: rgb(179, 231, 221);
+   width: 350px;
+   /*border: 5px dotted rgb(127, 233, 135);*/
+   margin: 0 auto;
  }
 
  /* The switch - the box around the slider */

@@ -11,6 +11,15 @@
 
 <%= link_to "Get random task", next_path  %>
 
+
+<%= form_tag "/search", method: :get do %>
+  <%= text_field_tag(
+      :q,
+      params[:q],
+      placeholder: "Search") %>
+      <%= submit_tag "Search" %>
+<% end %>
+
 <% if false %>
 <%= form_for @task,url: "/search?=#{:name}",method: :get do |f| %>
 <%= f.label "search bar" %>
