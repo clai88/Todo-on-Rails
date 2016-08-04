@@ -8,8 +8,9 @@ class TasksController < ApplicationController
 
   def completed
     @task = Task.find_by(id: params["id"])
-    @task.is_completed = Date.today
-    
+
+    @task.update(is_completed: Date.today)
+
     redirect_to list_path(@task.list.name)
   end
 

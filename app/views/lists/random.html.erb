@@ -1,3 +1,7 @@
 <h1>here is a random task</h1>
 
+<% if @task == nil %>
+sorry you currently don't have any tasks
+<% else %>
 <%= @task.name %>
+<% end %>

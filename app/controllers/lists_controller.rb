@@ -1,6 +1,17 @@
 class ListsController < ApplicationController
   def index
     @lists = List.where(user_id: session[:user_id])
+
+    @tasks = Task.all
+    @completed = @tasks.select { |t| t.is_completed != nil }
+
+    @today_task = @completed.select {|comp| comp.is_completed == Date.today}
+
+    @week_task = @completed.select {|comp| comp.is_completed == Date.today - 1.week}
+
+    @month_task = @completed.select {|comp| comp.is_completed == Date.today - 1.month}
+
+
   end
 
   def create
@@ -39,9 +50,10 @@ class ListsController < ApplicationController
 
     @query = params[:q]
     @lists = List.where(user_id: session[:user_id])
+    @tasks = Task.where(list_id: @lists.id)
 
-    @matched_list_items = List.all.select { |i| i.name.include? @query }
-    @matched_task_items = Task.all.select { |i| i.name.include? @query }
+    @matched_list_items = @lists.all.select { |i| i.name.include? @query }
+    @matched_task_items = @tasks.all.select { |i| i.name.include? @query }
   end
 
   private def list_params
