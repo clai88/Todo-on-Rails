@@ -5,18 +5,22 @@ Rails.application.routes.draw do
   delete '/login' => "sessions#destroy"
 
   resources :lists, only: [:new,:index,:create]
-  get '/lists/:name' => "lists#show"
+  get '/lists/:name' => "lists#show", as: :list
   post '/lists/:name/items' => "lists#new_task", as: :task_create
 
+
   patch '/items/:id' => "tasks#update", as: :task_update
-  delete '/items/:id' => "tasks#update"
+  delete '/items/:id' => "tasks#destroy"
 
   resources :users, only: [:new, :create]
+
+  get '/next' => "lists#random", as: :next
+  get '/search' => "lists#search", as: :search
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'sessions#new'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

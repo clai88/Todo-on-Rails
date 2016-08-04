@@ -1,18 +1,18 @@
 class TasksController < ApplicationController
   def update
-    @task = Task.where(id: params["id"])
+    @task = Task.find_by(id: params["id"])
 
 
-    @task.first.update(task_params)
+    @task.update(task_params)
 
-    redirect_to show_path
+    redirect_to "/lists/#{@task.list.name}"
   end
 
   def destroy
     @task = Task.find(params["id"])
-    @task.is_completed !@task.is_completed || true
+    @task.is_completed = Date.today
 
-    redirect_to show_path
+    redirect_to list_path(@task.id)
   end
 
   private def task_params

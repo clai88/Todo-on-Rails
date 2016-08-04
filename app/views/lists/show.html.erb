@@ -46,21 +46,13 @@
         </form>
       </td>
       <td>
-        <form  action= "/items/<%= task.id %>" method="post">
-            <input type="hidden" name="_method" value="DELETE">
+        <%= form_for task, url: "/items/#{task.id}", method: :delete do |f| %>
+        <%= f.submit "complete"  %>
+        <% end %>
+        <%= task.name %> is <%= task.is_completed %>
 
-
-          <label class="switch">
-            <input type="checkbox" name= "is_completed" value="Yes"
-            checked="checked">
-
-            <div class="slider round"></div>
-          </label>
-          <input type="submit" name="submit_button" value="Delete">
-        </form>
-        <%= task.is_completed %>
+        <%= link_to "Complete", task_update_path(task.id), method: :delete %>
       </td>
-
     </tr>
     <% end %>
   </tbody>
@@ -74,3 +66,5 @@
 
 <%= f.submit "submit list" %>
 <% end %>
+
+<%= link_to "Back to all lists", lists_path %>

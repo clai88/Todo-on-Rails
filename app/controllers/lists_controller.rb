@@ -29,9 +29,20 @@ class ListsController < ApplicationController
     redirect_to "/lists/#{params["name"]}"
   end
 
+  def random
+    @task = Task.all.sample
+  end
+
+  def search
+    @task = Task.new
+
+  end
+
   private def list_params
     params.require("list").permit(:name)
   end
+
+
 
   private def task_params
     params.require("task").permit(:name)

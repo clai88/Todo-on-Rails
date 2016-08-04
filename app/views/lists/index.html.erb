@@ -1,10 +1,20 @@
 <h1>these are all the lists</h1>
 
 <% @lists.each do |list| %>
-  <p>
-    <a href="/lists/<%= list.name %>"><%= list.name %></a>
+<p>
+  <a href="/lists/<%= list.name %>"><%= list.name %></a>
 
-  </p>
+</p>
 <% end %>
 
 <%= link_to "Submit new list", new_list_path %>
+
+<%= link_to "Get random task", next_path  %>
+
+<% if false %>
+<%= form_for @task,url: "/search?=#{:name}",method: :get do |f| %>
+<%= f.label "search bar" %>
+<%= f.text_field :name %>
+<%= f.submit "Search" %>
+<% end %>
+<% end %>
